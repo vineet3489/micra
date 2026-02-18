@@ -153,17 +153,29 @@ class MICRAState(TypedDict):
 
     # ── Phase 4: Synthesis ─────────────────────────────────────────────────
     build_buy_partner_decision: dict[str, Any]
-    # {
-    #   "recommendation": "partner",
-    #   "reasoning": "...",
-    #   "top_partners": [...],
-    #   "risks": [...]
-    # }
     mvp_recommendation: dict[str, Any]
+    gtm_strategy: dict[str, Any]
     # {
-    #   "must_have_features": [...],
-    #   "north_star_metric": "...",
-    #   "go_to_market": {...}
+    #   "primary_target_segments": [...],
+    #   "go_to_market_by_region": [...],
+    #   "pricing_options": [...],
+    #   "revenue_projections": {...},
+    #   "competitive_messaging": [...]
+    # }
+    team_requirements: dict[str, Any]
+    # {
+    #   "core_team_roles": [...],
+    #   "total_headcount": "...",
+    #   "critical_skills": [...],
+    #   "extended_team": [...]
+    # }
+    phased_roadmap: dict[str, Any]
+    # {
+    #   "mvp_phase": {...},
+    #   "phase_2": {...},
+    #   "phase_3": {...},
+    #   "phase_4": {...},
+    #   "next_steps": {...}
     # }
 
     # ── Phase 5: Report ────────────────────────────────────────────────────

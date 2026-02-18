@@ -205,6 +205,9 @@ def create_initial_state(query: str) -> MICRAState:
         # Phase 4
         build_buy_partner_decision={},
         mvp_recommendation={},
+        gtm_strategy={},
+        team_requirements={},
+        phased_roadmap={},
 
         # Phase 5
         report_path="",

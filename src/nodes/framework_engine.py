@@ -52,6 +52,7 @@ from src.nodes.frameworks.porter import PorterAgent
 from src.nodes.frameworks.swot import SWOTAgent
 from src.nodes.frameworks.tam import TAMAgent
 from src.nodes.frameworks.kano import KanoAgent
+from src.nodes.frameworks.jtbd import JTBDAgent
 
 logger = logging.getLogger(__name__)
 console = Console()
@@ -64,6 +65,7 @@ FRAMEWORK_REGISTRY: dict[str, type] = {
     "swot": SWOTAgent,
     "tam_sam_som": TAMAgent,
     "kano": KanoAgent,
+    "jtbd": JTBDAgent,
 }
 
 
