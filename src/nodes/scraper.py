@@ -100,14 +100,29 @@ def scraper_node(state: MICRAState) -> dict:
             # Build (url, source_type) pairs for the scraper
             url_pairs = [(r.url, r.source_type) for r in search_results]
 
-            # Add known competitor names as search queries to find their sites
+            # For each known competitor, run multiple targeted searches covering
+            # pricing, customer reviews, market share, feature comparisons, and news.
+            # This is the primary way we get rich competitor intelligence — the
+            # general market searches rarely surface detailed competitor data.
+            COMPETITOR_QUERY_TEMPLATES = [
+                "{name} product features capabilities 2024 2025",
+                "{name} pricing cost license subscription",
+                "{name} customer reviews G2 Capterra complaints",
+                "{name} market share revenue customers",
+                "{name} vs alternative comparison",
+                "{name} news funding product launch 2024",
+            ]
             for competitor in known_competitors:
-                competitor_results = discover_urls_for_plan(
-                    search_queries=[f"{competitor} official website product features"],
-                    source_types=["web_competitors"],
-                    max_urls=3
-                )
-                url_pairs.extend((r.url, "web_competitors") for r in competitor_results)
+                for template in COMPETITOR_QUERY_TEMPLATES:
+                    query = template.format(name=competitor)
+                    competitor_results = discover_urls_for_plan(
+                        search_queries=[query],
+                        source_types=["web_competitors"],
+                        max_urls=2
+                    )
+                    url_pairs.extend(
+                        (r.url, "web_competitors") for r in competitor_results
+                    )
 
             scraped_pages = scrape_urls(url_pairs, max_urls=SCRAPER_MAX_URLS)
 

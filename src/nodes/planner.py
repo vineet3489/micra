@@ -115,12 +115,22 @@ def planner_node(state: MICRAState) -> dict:
 Given a research brief, generate a precise research plan.
 
 For source types, choose from: web_competitors, academic_papers, news, regulatory, funding
-For frameworks, choose only what's relevant to the question. Don't apply BCG if there's
-no market positioning question. Don't apply North Star if there's no product decision.
+Always include web_competitors and news. Add academic_papers if the market has research literature.
+
+For frameworks, ALWAYS include: tam_sam_som, porter_5_forces, swot, kano, jtbd
+Add others only if relevant (e.g. bcg for portfolio questions, ansoff for expansion).
+
+For competitor_names_to_research: if the user mentioned specific competitors, list them.
+If not, list 3-5 LIKELY major competitors you know of for this market — the pipeline will
+verify and discover more. Better to over-specify than under-specify — it triggers richer scraping.
 
 Generate search_queries that are specific enough to return useful results.
 Bad: "DERMS software"
 Good: "DERMS distributed energy resource management system USA market leaders 2024"
+
+Always include at least 2 queries focused on competitors:
+  e.g. "top {market} software vendors comparison pricing 2024"
+  e.g. "{market} competitors market share revenue customers"
 
 For sub_questions, make them answerable — each should be a question the research
 will explicitly answer in the final report."""

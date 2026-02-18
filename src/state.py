@@ -52,8 +52,16 @@ class CompetitorProfile(TypedDict):
     name: str
     website: str
     product_summary: str
+    usp: str                       # unique selling proposition — their #1 claim
     core_features: list[str]
     pricing_model: str
+    pricing_specifics: str         # actual numbers found ("$200K license", "$40K/yr")
+    market_position: str           # "Market Leader (40-45% share)", "Challenger", etc.
+    market_share_estimate: str     # % or qualitative if no % found
+    revenue_estimate: str          # ARR/revenue if available publicly
+    notable_customers: list[str]   # customer names/logos mentioned in sources
+    customer_reviews_summary: str  # what users say on G2/Capterra/forums
+    recent_developments: list[str] # recent news, product launches, funding rounds
     target_segment: str
     tech_stack_signals: list[str]
     release_velocity: str

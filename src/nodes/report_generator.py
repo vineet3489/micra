@@ -387,16 +387,43 @@ def _render_competitive_landscape(doc: Document, state: MICRAState) -> None:
         _add_heading(doc, "2.2 Market Leaders & Challengers", level=2)
         for profile in profiles:
             _add_heading(doc, profile["name"], level=3)
+
+            # Market position & size
+            if profile.get("market_position"):
+                _add_kv(doc, "Market Position", profile["market_position"])
+            if profile.get("market_share_estimate"):
+                _add_kv(doc, "Market Share", profile["market_share_estimate"])
+            if profile.get("revenue_estimate"):
+                _add_kv(doc, "Revenue", profile["revenue_estimate"])
+            if profile.get("funding"):
+                _add_kv(doc, "Ownership / Funding", profile["funding"])
+
+            # USP and product
+            if profile.get("usp"):
+                _add_kv(doc, "Unique Selling Proposition", profile["usp"])
             _add_kv(doc, "Product", profile.get("product_summary", ""))
             _add_kv(doc, "Target Segment", profile.get("target_segment", ""))
-            _add_kv(doc, "Pricing", profile.get("pricing_model", ""))
-            if profile.get("funding"):
-                _add_kv(doc, "Funding / Market Position", profile["funding"])
 
+            # Pricing
+            _add_kv(doc, "Pricing Model", profile.get("pricing_model", ""))
+            if profile.get("pricing_specifics"):
+                _add_kv(doc, "Pricing Details", profile["pricing_specifics"])
+
+            # Features
             if profile.get("core_features"):
                 _add_body(doc, "Core Features:", bold=True)
                 for f in profile["core_features"]:
                     _add_bullet(doc, f)
+
+            # Notable customers
+            if profile.get("notable_customers"):
+                _add_kv(doc, "Notable Customers",
+                        " | ".join(profile["notable_customers"][:8]))
+
+            # Customer voice
+            if profile.get("customer_reviews_summary"):
+                _add_body(doc, "What Customers Say:", bold=True)
+                _add_body(doc, profile["customer_reviews_summary"])
 
             if profile.get("strengths"):
                 _add_body(doc, "Why Customers Choose Them:", bold=True)
@@ -404,9 +431,15 @@ def _render_competitive_landscape(doc: Document, state: MICRAState) -> None:
                     _add_bullet(doc, s, color=GREEN)
 
             if profile.get("weaknesses"):
-                _add_body(doc, "Customer Pain Points:", bold=True)
+                _add_body(doc, "Customer Complaints & Weaknesses:", bold=True)
                 for w in profile["weaknesses"]:
                     _add_bullet(doc, w, color=RED)
+
+            # Recent news
+            if profile.get("recent_developments"):
+                _add_body(doc, "Recent Developments:", bold=True)
+                for d in profile["recent_developments"]:
+                    _add_bullet(doc, d, color=ORANGE)
 
             if profile.get("differentiation_gaps"):
                 _add_body(doc, "Gaps We Can Exploit:", bold=True)
