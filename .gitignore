@@ -1,0 +1,24 @@
+# Environment — contains real API keys, never commit
+.env
+
+# Virtual environment
+venv/
+.venv/
+env/
+
+# Generated outputs (reports + vector DB) — not source code
+outputs/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
